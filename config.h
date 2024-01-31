@@ -80,7 +80,7 @@ static const char *reconnectcmd[] = { "/bin/sh", "-c", "\"bluetoothctl connect 9
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = wallpapercmd } },
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = keepassxccmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filescmd } },
