@@ -112,6 +112,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_k,      tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_j,      tagmon,         {.i = -1 } },
+	// duplicate keybinds should trigger on the same keypress
+	{ MODKEY|ShiftMask|ControlMask, XK_k,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask|ControlMask, XK_j,      focusmon,       {.i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
