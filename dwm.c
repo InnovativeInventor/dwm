@@ -209,7 +209,6 @@ static void sigchld(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
-static void tagfocusmon(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
@@ -1448,15 +1447,21 @@ sendmon(Client *c, Monitor *m)
 {
 	if (c->mon == m)
 		return;
+	int hadfocus = (c == selmon->sel);
 	unfocus(c, 1);
 	detach(c);
 	detachstack(c);
+	arrange(c->mon);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
 	attach(c);
 	attachstack(c);
-	focus(NULL);
-	arrange(NULL);
+	arrange(m);
+	if (hadfocus) {
+		focus(c);
+		restack(m);
+	} else
+		focus(NULL);
 }
 
 void
@@ -1704,15 +1709,6 @@ tagmon(const Arg *arg)
 	if (!selmon->sel || !mons->next)
 		return;
 	sendmon(selmon->sel, dirtomon(arg->i));
-}
-
-void
-tagfocusmon(const Arg *arg)
-{
-	if (!selmon->sel || !mons->next)
-		return;
-	sendmon(selmon->sel, dirtomon(arg->i));
-	focusmon(arg);
 }
 
 void
