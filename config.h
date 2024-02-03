@@ -62,7 +62,7 @@ static const char *termcmd[]  = { "alacritty", NULL }; //{ "emacs", "-f", "vterm
 static const char *browsercmd[]  = { "firefox", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-c", "-a", "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
-static const char *logoutcmd[]  = { "xfce-session-logout", NULL };
+static const char *logoutcmd[]  = { "xfce4-session-logout", NULL };
 static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
 static const char *mailcmd[]  = { "alacritty", "-e", "neomutt", NULL };
 
