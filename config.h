@@ -59,30 +59,23 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_white, "-sb", col_highlight, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "alacritty", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
-static const char *browsercmd[]  = { "librewolf", NULL };
+static const char *browsercmd[]  = { "firefox", NULL };
 static const char *emacscmd[]  = { "emacsclient", "-c", "-a", "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
-static const char *logoutcmd[]  = { "slock", NULL };
+static const char *logoutcmd[]  = { "xfce-session-logout", NULL };
 static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
 static const char *mailcmd[]  = { "alacritty", "-e", "neomutt", NULL };
-static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
+static const char *upvol[]   = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
+static const char *downvol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
+static const char *mutevol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
 
-static const char *lcdbrightencmd[]  = { "doas", "/home/russel/.local/bin/brightness", "1000", NULL };
-static const char *lcddimcmd[]  = { "doas", "/home/russel/.local/bin/brightness", "-1000", NULL };
-
-static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
-
-static const char *reconnectcmd[] = { "/bin/sh", "-c", "\"bluetoothctl connect 95:05:BB:25:30:39; bluetoothctl disconnect 95:05:BB:25:30:39\"", NULL };
+static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "5", NULL };
+static const char *lcddimcmd[]  = { "xbacklight", "-dec", "5", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = wallpapercmd } },
-	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = keepassxccmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filescmd } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
@@ -90,7 +83,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      spawn,          {.v = logoutcmd} },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
-	{ MODKEY,                       XK_a,      spawn,          {.v = reconnectcmd} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
