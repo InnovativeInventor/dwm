@@ -72,6 +72,7 @@ static const char *mutevol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "
 
 static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "5", NULL };
 static const char *lcddimcmd[]  = { "xbacklight", "-dec", "5", NULL };
+static const char *rfkillcmd[]  = { "rfkill", "toggle", "all", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -115,14 +116,15 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,                       XK_Left,   viewlr,         {.ui = 0} }, \
 	{ MODKEY,                       XK_Right,  viewlr,         {.ui = 1} }, \
-	{ MODKEY|ShiftMask,             XK_Up,   spawn,          {.v = lcdbrightencmd} }, \
-	{ MODKEY|ShiftMask,             XK_Down,  spawn,          {.v = lcddimcmd} }, \
+	{ MODKEY|ShiftMask,             XK_Up,     spawn,          {.v = lcdbrightencmd} }, \
+	{ MODKEY|ShiftMask,             XK_Down,   spawn,          {.v = lcddimcmd} }, \
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                       XF86XK_AudioMute,        spawn, {.v = mutevol } },
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
-	{ 0,                       XF86XK_MonBrightnessUp, spawn, {.v = lcdbrightencmd   } },
-	{ 0,                       XF86XK_MonBrightnessDown, spawn, {.v = lcddimcmd   } },
+	{ 0,                       XF86XK_MonBrightnessUp,  spawn, {.v = lcdbrightencmd } },
+	{ 0,                       XF86XK_MonBrightnessDown,spawn, {.v = lcddimcmd      } },
+	{ 0,                       XF86XK_RFKill,           spawn, {.v = rfkillcmd } },
 };
 
 /* button definitions */
